@@ -34,7 +34,8 @@ typedef struct scope_t {
 
 int bf_char(char);
 int bf_syntax(char* buf, int len);
-int bf_generate(scope_t*, char*, char);
+int bf_generate(scope_t*, char*, int, char);
 void bf_free(scope_t*);
+void bf_print(scope_t*, int);
 
 #endif
