@@ -40,17 +40,10 @@ int main(int argc, char** argv) {
   prog[pos] = '\0';
   pos++;
   prog = realloc(prog, sizeof(char) * pos);
-
-  printf("Raw:\n");
+  
   raw_println(prog, pos);
-  printf("=====================\n");
-
   scope_t scope;
   len = bf_generate(&scope, prog, pos);
-
-  printf("=====================\n");
-  printf("Info:\n");
-  printf("len: %d\n", len);
   bf_print(&scope, 0);
 
   return 0;

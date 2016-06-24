@@ -40,13 +40,7 @@ void _scope_clean(scope_t* root, int progLen, int innersLen) {
   root -> innersLen = innersLen;
 }
 
-int _generator(scope_t* scope, char* buf, int maxSize, int offset, char end, int depth) {
-  printf("%*s", depth, "");
-  printf("-= start =-\n");
-  printf("%*s", depth, "");
-  printf("buf: ");
-  raw_println(buf, maxSize);
-
+int _generator(scope_t* scope, char* buf, int maxSize, int offset, char end) {
   scope -> inst = malloc(sizeof(inst_t) * maxSize);
   scope -> len = 0;
   scope -> pos = 0;
@@ -60,63 +54,32 @@ int _generator(scope_t* scope, char* buf, int maxSize, int offset, char end, int
   int scopes = 0;
   if(maxSize > 0 && buf[0] != '\0') {
     for(;; i++) {
-      printf("%*s", depth, "");
-      printf("-=-=-\n");
-      printf("%*s", depth, "");
-      printf("i: %d\n", i);
-      printf("%*s", depth, "");
-      printf("global offset: %d\n", offset + i);
       scope -> inst[instPos] = buf[i];
-
-      printf("%*s", depth, "");
-      printf("(end: %c) inst[%d] = '%c'\n", end, instPos, buf[i]);
       instPos++;
 
       if((i > 0 || end == '\0') && buf[i] == BF_LPS) {
         scope_t* sub = malloc(sizeof(scope_t));
-        printf("%*s", depth, "");
-        printf("loop detected (%p)\n", sub);
-        printf("%*s", depth, "");
-        printf("i: %d\n", i);
-        i += _generator(sub, buf + i, maxSize, offset + i, BF_LPF, depth + 2) - 1;
-
-        printf("%*s", depth, "");
-        printf("loop finished (%p)\n", sub);
-        printf("%*s", depth, "");
-        printf("i: %d\n", i);
+        i += _generator(sub, buf + i, maxSize, offset + i, BF_LPF) - 1;
         
         scope -> inst[instPos] = buf[i];
-        printf("%*s", depth, "");
-        printf("inst[%d] = '%c'\n", instPos, buf[i]);
         instPos++;
 
         sub -> parent = scope;
         _scope_append(scope, sub, &scopes);
-
-        printf("%*s", depth, "");
-        printf("sub len: %d\n", sub -> len);
       }
       else if(buf[i] == end) {
-        printf("%*s", depth, "");
-        printf("break\n");
         break;
-      }
-
-      if(offset + i > 200) {
-        volatile int a = 1 / 0;
       }
     }
   }
   scope -> totalLen = i + 1;
 
   _scope_clean(scope, instPos, scopes);
-  printf("%*s", depth, "");
-  printf("-= end (ret: %d) =-\n", scope -> totalLen);
   return scope -> totalLen;
 }
 
 int bf_generate(scope_t* scope, char* buf, int maxSize) {
-  return _generator(scope, buf, maxSize, 0, '\0', 0);
+  return _generator(scope, buf, maxSize, 0, '\0');
 }
 
 void bf_free(scope_t* scope) {
