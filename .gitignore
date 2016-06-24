@@ -35,3 +35,6 @@
 # Generated files
 obj/
 infinifuck
+
+# Vim
+*.swp
