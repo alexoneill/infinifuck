@@ -10,16 +10,6 @@ int usage(int argc, char** argv) {
   return 1;
 }
 
-void raw_print(char* buf, int len) {
-  for(int i = 0; i < len; i++)
-    if(0x20 <= buf[i] && buf[i] <= 0x7F)
-      printf("%c", buf[i]);
-    else
-      printf("\\%d", (int) buf[i]);
-
-  printf("\n");
-}
-
 int main(int argc, char** argv) {
   if(argc != 2)
     return usage(argc, argv);
@@ -52,11 +42,11 @@ int main(int argc, char** argv) {
   prog = realloc(prog, sizeof(char) * pos);
 
   printf("Raw:\n");
-  raw_print(prog, pos);
+  raw_println(prog, pos);
   printf("=====================\n");
 
   scope_t scope;
-  len = bf_generate(&scope, prog, pos, '\0');
+  len = bf_generate(&scope, prog, pos);
 
   printf("=====================\n");
   printf("Info:\n");

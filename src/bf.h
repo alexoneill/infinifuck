@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "util.h"
+
 #define BF_FWD 0x3E // > Forward
 #define BF_BAK 0x3C // < Backwards
 #define BF_INC 0x2B // + Increment
@@ -26,15 +28,18 @@ typedef struct scope_t {
   int len;
   int pos;
 
+  int totalLen;
+
   int offset;
   struct scope_t* parent;
   struct scope_t* inners;
   int innersLen;
+  int innersPos;
 } scope_t;
 
 int bf_char(char);
 int bf_syntax(char* buf, int len);
-int bf_generate(scope_t*, char*, int, char);
+int bf_generate(scope_t*, char*, int);
 void bf_free(scope_t*);
 void bf_print(scope_t*, int);
 
