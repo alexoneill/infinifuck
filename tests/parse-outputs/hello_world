@@ -1,0 +1,199 @@
+scope {
+  instructions: -,+[]
+  len: 5
+  total: 191
+  pos: 0
+  scope: 0
+
+  scope {
+    instructions: [-[]>>>[]+>--[]<[]<[]<.[]<-,+]
+    len: 30
+    total: 187
+    pos: 0
+    scope: 0
+
+    scope {
+      instructions: [>>++++[]<+<-[]]
+      len: 16
+      total: 57
+      pos: 0
+      scope: 0
+
+      scope {
+        instructions: [>++++++++<-]
+        len: 13
+        total: 13
+        pos: 0
+        scope: 0
+      }
+
+      scope {
+        instructions: [>+>+>-[]<[]<<<<<-]
+        len: 19
+        total: 32
+        pos: 0
+        scope: 0
+
+        scope {
+          instructions: [>>>]
+          len: 5
+          total: 5
+          pos: 0
+          scope: 0
+        }
+
+        scope {
+          instructions: [[]>>+>]
+          len: 8
+          total: 12
+          pos: 0
+          scope: 0
+
+          scope {
+            instructions: [>+<-]
+            len: 6
+            total: 6
+            pos: 0
+            scope: 0
+          }
+        }
+      }
+    }
+
+    scope {
+      instructions: [-]
+      len: 3
+      total: 3
+      pos: 0
+      scope: 0
+    }
+
+    scope {
+      instructions: [-[]]
+      len: 5
+      total: 14
+      pos: 0
+      scope: 0
+
+      scope {
+        instructions: [<->+++[]]
+        len: 10
+        total: 11
+        pos: 0
+        scope: 0
+
+        scope {
+          instructions: [-]
+          len: 3
+          total: 3
+          pos: 0
+          scope: 0
+        }
+      }
+    }
+
+    scope {
+      instructions: [++++++++++++<[]>>[]>[]<<[]]
+      len: 28
+      total: 89
+      pos: 0
+      scope: 0
+
+      scope {
+        instructions: [>-[]>[]<<<<<-]
+        len: 15
+        total: 30
+        pos: 0
+        scope: 0
+
+        scope {
+          instructions: [>+>>]
+          len: 6
+          total: 6
+          pos: 0
+          scope: 0
+        }
+
+        scope {
+          instructions: [+[]>+>>]
+          len: 9
+          total: 13
+          pos: 0
+          scope: 0
+
+          scope {
+            instructions: [<+>-]
+            len: 6
+            total: 6
+            pos: 0
+            scope: 0
+          }
+        }
+      }
+
+      scope {
+        instructions: [<+>-]
+        len: 6
+        total: 6
+        pos: 0
+        scope: 0
+      }
+
+      scope {
+        instructions: [-[]<<[]>>]
+        len: 11
+        total: 25
+        pos: 0
+        scope: 0
+
+        scope {
+          instructions: [-<<[]>>]
+          len: 9
+          total: 10
+          pos: 0
+          scope: 0
+
+          scope {
+            instructions: [-]
+            len: 3
+            total: 3
+            pos: 0
+            scope: 0
+          }
+        }
+
+        scope {
+          instructions: [<<->>-]
+          len: 8
+          total: 8
+          pos: 0
+          scope: 0
+        }
+      }
+
+      scope {
+        instructions: [<<+>>-]
+        len: 8
+        total: 8
+        pos: 0
+        scope: 0
+      }
+    }
+
+    scope {
+      instructions: [-]
+      len: 3
+      total: 3
+      pos: 0
+      scope: 0
+    }
+
+    scope {
+      instructions: [-]
+      len: 3
+      total: 3
+      pos: 0
+      scope: 0
+    }
+  }
+}

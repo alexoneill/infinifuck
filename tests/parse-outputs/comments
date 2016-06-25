@@ -1,0 +1,15 @@
+scope {
+  instructions: []
+  len: 2
+  total: 10
+  pos: 0
+  scope: 0
+
+  scope {
+    instructions: [.<>,+-.]
+    len: 9
+    total: 9
+    pos: 0
+    scope: 0
+  }
+}

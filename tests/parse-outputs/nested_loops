@@ -1,0 +1,87 @@
+scope {
+  instructions: [][][][]
+  len: 8
+  total: 21
+  pos: 0
+  scope: 0
+
+  scope {
+    instructions: [[]]
+    len: 4
+    total: 6
+    pos: 0
+    scope: 0
+
+    scope {
+      instructions: [[]]
+      len: 4
+      total: 4
+      pos: 0
+      scope: 0
+
+      scope {
+        instructions: []
+        len: 2
+        total: 2
+        pos: 0
+        scope: 0
+      }
+    }
+  }
+
+  scope {
+    instructions: []
+    len: 2
+    total: 2
+    pos: 0
+    scope: 0
+  }
+
+  scope {
+    instructions: [[]]
+    len: 4
+    total: 8
+    pos: 0
+    scope: 0
+
+    scope {
+      instructions: [[]]
+      len: 4
+      total: 6
+      pos: 0
+      scope: 0
+
+      scope {
+        instructions: [[]]
+        len: 4
+        total: 4
+        pos: 0
+        scope: 0
+
+        scope {
+          instructions: []
+          len: 2
+          total: 2
+          pos: 0
+          scope: 0
+        }
+      }
+    }
+  }
+
+  scope {
+    instructions: [[]]
+    len: 4
+    total: 4
+    pos: 0
+    scope: 0
+
+    scope {
+      instructions: []
+      len: 2
+      total: 2
+      pos: 0
+      scope: 0
+    }
+  }
+}

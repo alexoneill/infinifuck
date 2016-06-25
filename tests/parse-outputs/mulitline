@@ -1,0 +1,15 @@
+scope {
+  instructions: +++[]
+  len: 5
+  total: 7
+  pos: 0
+  scope: 0
+
+  scope {
+    instructions: [-]
+    len: 3
+    total: 3
+    pos: 0
+    scope: 0
+  }
+}
