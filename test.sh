@@ -3,15 +3,12 @@
 # aoneill - 06/25/16
 
 function init() {
-  tmp=$(mktemp)
-  make 2>&1 > "$tmp"
+  make clean
+  make
   if [[ "$?" != "0" ]]; then
     echo "error: Could not make executable!"
-    cat "$tmp"
-    rm "$tmp"
     return 1
   fi
-  rm "$tmp"
 
   echo "Testing parsing..."
   ./tests/support/parseTests.sh "./infinifuck" "--parse-only" \
