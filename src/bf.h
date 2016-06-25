@@ -24,13 +24,16 @@
 typedef char inst_t;
 
 typedef struct scope_t {
+  // Instructions
   inst_t* inst;
   int len;
   int pos;
 
+  // "Global" information
   int totalLen;
-
   int offset;
+
+  // Sub scope information
   struct scope_t* parent;
   struct scope_t* inners;
   int innersLen;

@@ -6,6 +6,7 @@
 
 #include <errno.h>
 #include <fcntl.h>
+#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,5 +16,26 @@
 #include "bf.h"
 
 #define BUFLEN 10
+
+// Flags
+static int HELP;
+static int PARSE_ONLY;
+static int VERBOSE;
+
+static struct option long_options[] = {
+  // Long options
+  {"help",       no_argument, &HELP,       1},
+  {"parse-only", no_argument, &PARSE_ONLY, 1},
+  {"verbose",    no_argument, &VERBOSE,    1},
+  // Short options
+  {"h",          no_argument, 0,          'h'},
+  {"p",          no_argument, 0,          'p'},
+  {"v",          no_argument, 0,          'v'},
+  {0, 0, 0, 0}
+};
+
+int usage(int, char**);
+int parseArgs(int, char**, int*);
+int main(int, char**);
 
 #endif
