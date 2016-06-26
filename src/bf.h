@@ -35,7 +35,7 @@ typedef struct scope_t {
 
   // Sub scope information
   struct scope_t* parent;
-  struct scope_t* inners;
+  struct scope_t** inners;
   int innersLen;
   int innersPos;
 } scope_t;

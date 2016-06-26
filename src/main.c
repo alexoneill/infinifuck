@@ -105,6 +105,14 @@ int main(int argc, char** argv) {
     return 0;
   }
 
-  // Run program
+  // Initialize tape
+  tape_t tape;
+  tape_init(&tape);
+
+  // Cleanup
+  tape_free(&tape);
+  bf_free(&scope);
+  free(prog);
+
   return 0;
 }

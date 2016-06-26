@@ -14,6 +14,7 @@
 #include <unistd.h>
 
 #include "bf.h"
+#include "tape.h"
 
 #define BUFLEN 10
 

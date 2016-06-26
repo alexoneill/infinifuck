@@ -25,11 +25,11 @@ void _scope_append(scope_t* root, scope_t* item, int* len) {
   if(*len == root -> innersLen) {
     root -> innersLen *= 2;
     root -> inners = realloc(root -> inners, 
-        sizeof(scope_t) * (root -> innersLen));
+        sizeof(scope_t*) * (root -> innersLen));
   }
 
   // Record the sub scope
-  root -> inners[*len] = *item;
+  root -> inners[*len] = item;
   (*len)++;
 }
 
@@ -41,7 +41,7 @@ void _scope_clean(scope_t* root, int progLen, int innersLen) {
   // Release unused memory
   root -> inst = realloc(root -> inst, sizeof(inst_t) * progLen);
   root -> len = progLen;
-  root -> inners = realloc(root -> inners, sizeof(scope_t) * innersLen);
+  root -> inners = realloc(root -> inners, sizeof(scope_t*) * innersLen);
   root -> innersLen = innersLen;
 }
 
@@ -53,7 +53,7 @@ int _generator(scope_t* scope, char* buf, int maxSize, int offset, char end) {
   scope -> offset = offset;
 
   // Heuristic
-  scope -> inners = malloc(sizeof(scope_t) * BF_EST_INIT_LOOPS);
+  scope -> inners = malloc(sizeof(scope_t*) * BF_EST_INIT_LOOPS);
   scope -> innersLen = BF_EST_INIT_LOOPS;
   scope -> innersPos = 0;
 
@@ -106,12 +106,14 @@ void bf_free(scope_t* scope) {
   free(scope -> inst);
 
   // Recursively free
-  for(int i = 0; i < scope -> innersLen; i++)
-    bf_free(&(scope -> inners[i]));
+  for(int i = 0; i < scope -> innersLen; i++) {
+    bf_free(scope -> inners[i]);
+    // TODO: find leak here
+    free(scope -> inners[i]);
+  }
 
   // Free the rest
   free(scope -> inners);
-  free(scope);
 }
 
 void bf_print(scope_t* scope, int depth) {
@@ -127,7 +129,7 @@ void bf_print(scope_t* scope, int depth) {
   // Recurse
   for(int i = 0; i < scope -> innersLen; i++) {
     printf("\n");
-    bf_print(&(scope -> inners[i]), depth + 2);
+    bf_print(scope -> inners[i], depth + 2);
   }
 
   printf("%*s}\n", depth, "");
