@@ -1,6 +1,6 @@
 #!/bin/bash
-# parseTests.sh
-# aoneill - 06/25/16
+# outputTests.sh
+# aoneill - 06/26/16
 
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "$DIR/unit.sh"
@@ -12,19 +12,19 @@ function init() {
     return 1
   fi
 
-  flags="$2"
-
-  inputDir="$3"
+  inputDir="$2"
   if ! [[ -d "$inputDir" ]]; then
     echo "error: $inputDir is not a directory!"
     return 1
   fi
 
-  outputDir="$4"
+  outputDir="$3"
   if ! [[ -d "$outputDir" ]]; then
     echo "error: $outputDir is not a directory!"
     return 1
   fi
+  
+  flags="$4"
 
   hasFailed=0
   results=$(mktemp)
@@ -40,6 +40,8 @@ function init() {
     else
       echo "Success: $file" >> "$results"
     fi
+
+    rm "$progOut"
   done
 
   cat "$results"

@@ -11,8 +11,14 @@ function init() {
   fi
 
   echo "Testing parsing..."
-  ./tests/support/parseTests.sh "./infinifuck" "--parse-only" \
-    "./tests/scripts/" "./tests/parse-outputs/"
+  ./tests/support/outputTests.sh "./infinifuck" "./tests/parse-scripts/" \
+    "./tests/parse-outputs/" "--parse-only"
+  [[ "$?" != "0" ]] && return 1
+  echo "Passed!"
+
+  echo "Testing scripts..."
+  ./tests/support/outputTests.sh "./infinifuck" "./tests/stdout-scripts/" \
+    "./tests/stdout-outputs/" ""
   [[ "$?" != "0" ]] && return 1
   echo "Passed!"
 }

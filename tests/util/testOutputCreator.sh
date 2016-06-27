@@ -1,6 +1,6 @@
 #!/bin/bash
-# parseOutputCreator.sh
-# aoneill - 06/25/16
+# testOutputCreator.sh
+# aoneill - 06/26/16
 
 function init() {
   prog="$1"
@@ -9,15 +9,14 @@ function init() {
     return 1
   fi
 
-  flags="$2"
-
-  inputDir="$3"
+  inputDir="$2"
   if ! [[ -d "$inputDir" ]]; then
     echo "error: $inputDir is not a directory!"
     return 1
   fi
 
-  outputDir="$4"
+  outputDir="$3"
+  flags="$4"
   
   echo "This will overwrite all files in $outputDir!"
   echo -n "Continue? (y/n) "
