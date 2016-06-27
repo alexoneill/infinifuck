@@ -149,7 +149,11 @@ void tape_print(tape_t* tape) {
   // Print as if it were a list
   printf("[");
   while(follower != NULL) {
+    if(follower == tape -> current)
+      printf("|");
     printf("%2d", follower -> content);
+    if(follower == tape -> current)
+      printf("|");
     printf("%s", follower -> pos == NULL ? "]\n" : ", ");
     follower = follower -> pos;
   }

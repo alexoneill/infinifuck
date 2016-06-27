@@ -15,7 +15,7 @@ int usage(int argc, char** argv) {
   return 1;
 }
 
-int parseArgs(int argc, char** argv, int* start) {
+int _parseArgs(int argc, char** argv, int* start) {
   if(argc < 2)
     return usage(argc, argv);
 
@@ -58,11 +58,105 @@ int parseArgs(int argc, char** argv, int* start) {
   return 0;
 }
 
+void _run(scope_t* scope, tape_t* tape) {
+  // Print info if verbose
+  if(VERBOSE) {
+    bf_print(scope, 0);
+    tape_print(tape);
+  }
+    
+  // Loop while there is code to run
+  int depth = 0;
+  char buf[1];
+  while(scope -> pos < scope -> len) {
+    // Be informative
+    if(VERBOSE) {
+      printf("%*s", depth, "");
+      raw_println(scope -> inst, scope -> len);
+      printf("%*s^\n", depth + scope -> pos, "");
+    }
+
+    // Decide what to do
+    switch(scope -> inst[scope -> pos]) {
+      case BF_FWD:
+        tape_goto(tape, tape -> pos + 1);
+        break;
+
+      case BF_BAK:
+        tape_goto(tape, tape -> pos - 1);
+        break;
+
+      case BF_INC:
+        tape_inc(tape);
+        break;
+
+      case BF_DEC:
+        tape_dec(tape);
+        break;
+        
+      case BF_OUT:
+        printf("%c", tape_get(tape));
+        break;
+
+      case BF_INP:
+        // Try to read, exit on failure
+        if(read(STDIN_FILENO, buf, 1) <= 0) {
+          dprintf(STDERR_FILENO, "error: Could not read from STDIN!\n");
+          return;
+        }
+
+        tape_set(tape, (int) buf[0]);
+        break;
+
+      case BF_LPS:
+        // Start the loop only if the cell is non-zero
+        if(tape_get(tape) != 0) {
+          depth += 2;
+          scope = scope -> inners[scope -> innersPos];
+          
+          scope -> pos = 0;
+          scope -> innersPos = 0;
+        }
+
+        // Skip the loop
+        else {
+          scope -> pos += 1;
+          scope -> innersPos++;
+        }
+        break;
+      case BF_LPF:
+        // Restart if the cell is non-zero
+        if(tape_get(tape) != 0) {
+          scope -> pos = 0;
+          scope -> innersPos = 0;
+        }
+        
+        // Drop down to the parent scope
+        else {
+          depth -= 2;
+          scope = scope -> parent;
+          scope -> innersPos++;
+          scope -> pos++;
+        }
+        break;
+    }
+
+    // Move along
+    scope -> pos++;
+    
+    // Show the tape
+    if(VERBOSE) {
+      printf("%*s", depth, "");
+      tape_print(tape);
+    }
+  }
+}
+
 int main(int argc, char** argv) {
   // Parse arguments
   int start;
   int status = 0;
-  if((status = parseArgs(argc, argv, &start)) != 0)
+  if((status = _parseArgs(argc, argv, &start)) != 0)
     return status;
 
   // Open script
@@ -108,6 +202,9 @@ int main(int argc, char** argv) {
   // Initialize tape
   tape_t tape;
   tape_init(&tape);
+
+  // Run
+  _run(&scope, &tape);
 
   // Cleanup
   tape_free(&tape);

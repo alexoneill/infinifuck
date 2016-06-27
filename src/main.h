@@ -16,7 +16,7 @@
 #include "bf.h"
 #include "tape.h"
 
-#define BUFLEN 10
+#define BUFLEN 1024
 
 // Flags
 static int HELP;
@@ -36,7 +36,6 @@ static struct option long_options[] = {
 };
 
 int usage(int, char**);
-int parseArgs(int, char**, int*);
 int main(int, char**);
 
 #endif
