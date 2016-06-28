@@ -6,6 +6,10 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 function init() {
   prog="$1"
+  if [[ "$#" != "1" ]]; then
+    echo "error: missing executable"
+    return 1
+  fi
 
   make clean
   make
