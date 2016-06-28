@@ -188,9 +188,15 @@ int main(int argc, char** argv) {
   prog[pos] = '\0';
   pos++;
 
-  // Remove extra space, parse scope
+  // Remove extra space
   scope_t scope;
   prog = realloc(prog, sizeof(char) * pos);
+  if(!bf_syntax(prog, pos)) {
+    printf("error: Syntax error in %s\n", filename);
+    return 1;
+  }
+
+  // Generate the scope
   len = bf_generate(&scope, prog, pos);
 
   // Helpful for testing

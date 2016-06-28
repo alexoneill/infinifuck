@@ -20,6 +20,15 @@ int bf_char(inst_t inst) {
   }
 }
 
+int bf_syntax(char* buf, int len) {
+  int depth = 0;
+  for(int i = 0; i < len; i++)
+    if(bf_char(buf[i]))
+      depth += (buf[i] == BF_LPS) - (buf[i] == BF_LPF);
+
+  return (depth == 0);
+}
+
 void _scope_append(scope_t* root, scope_t* item, int* len) {
   // If there is not space left
   if(*len == root -> innersLen) {
