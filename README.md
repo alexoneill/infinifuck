@@ -17,26 +17,22 @@ make all
 Usage
 -----
 
-Run brainfuck scripts in the following fashion
-
 ```bash
-./infinifuck ./path/to/brainfuck/script
+$ ./infinifuck --help
+usage: ./infinifuck [flags] file
+  args:
+    file: brainfuck script to execute
+  flags:
+    -h, --help:       Display this help message
+    -p, --parse-only: Parse the script then exit
+    -v, --verbose:    Be verbose while running
 ```
 
-See how the script is interpreted using
+Testing
+-------
+
+Run the (simple) test suite with
 
 ```bash
-./infinifuck --parse-only ./path/to/brainfuck/script
-```
-
-See more information about the execution using
-
-```bash
-./infinifuck --verbose ./path/to/brainfuck/script
-```
-
-See more options and help using
-
-```bash
-./infinifuck --help
+./tests/driver.sh ./infinifuck
 ```
